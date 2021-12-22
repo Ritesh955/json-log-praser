@@ -1,10 +1,10 @@
 # json-log-praser
 This log parsing util validates json log lines, parses the values and generates unique file extensions to file names map. 
+This map is then converted to file extensions to file counts. The intermediate json log state could serve another use case.
 
-A json log line follows the below schema:
+A json log record follows the below schema:
 
 JSON format:
-
 ```
 
 ts: timestamp
