@@ -1,3 +1,5 @@
+JSON_LOG_RECORD_FIELD_COUNT = 9
+
 JSON_LOG_RECORD_SCHEMA = {
     "type": "object",
     "properties": {

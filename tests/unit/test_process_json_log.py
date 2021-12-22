@@ -125,8 +125,8 @@ def test_invalid_dp_field_value():
     malformed_json_log = copy.deepcopy(sample_json_log)
     malformed_json_log = malformed_json_log + [
         {
-            "ts": "invalid timestamp",
-            "pt": "55",
+            "ts": 1551140352,
+            "pt": 55,
             "si": "3380fb19-0bdb-46ab-8781-e4c5cd448074",
             "uu": "0dd24034-36d6-4b1e-a6c1-a52cc984f105",
             "bg": "77e28e28-745a-474b-a496-3c0e086eaec0",
@@ -136,8 +136,8 @@ def test_invalid_dp_field_value():
             "dp": 1000000000000000
         },
         {
-            "ts": "invalid timestamp",
-            "pt": "invalid pt",
+            "ts": 1551140352,
+            "pt": 55,
             "si": "3380fb19-0bdb-46ab-8781-e4c5cd448074",
             "uu": "0dd24034-36d6-4b1e-a6c1-a52cc984f105",
             "bg": "77e28e28-745a-474b-a496-3c0e086eaec0",
@@ -151,4 +151,59 @@ def test_invalid_dp_field_value():
     file_ext_to_name = praser.process_json_log(malformed_json_log)
     actual_output = praser.get_file_ext_to_file_name_count(file_ext_to_name)
     assert expected_output == actual_output
+
+
+def test_invalid_nm_field_value():
+    missing_field_json_log = copy.deepcopy(sample_json_log)
+    missing_field_json_log = missing_field_json_log + [
+        {
+            "ts": 1551140352,
+            "pt": 55,
+            "si": "3380fb19-0bdb-46ab-8781-e4c5cd448074",
+            "uu": "0dd24034-36d6-4b1e-a6c1-a52cc984f105",
+            "bg": "77e28e28-745a-474b-a496-3c0e086eaec0",
+            "sha": "abb3ec1b8174043d5cd21d21fbe3c3fb3e9a11c7ceff3314a3222404feedda52",
+            "nm": "abc.test.jpg",
+            "ph": "",
+            "dp": 1
+        },
+        {
+            "ts": 1551140352,
+            "pt": 55,
+            "si": "3380fb19-0bdb-46ab-8781-e4c5cd448074",
+            "uu": "0dd24034-36d6-4b1e-a6c1-a52cc984f105",
+            "bg": "77e28e28-745a-474b-a496-3c0e086eaec0",
+            "sha": "abb3ec1b8174043d5cd21d21fbe3c3fb3e9a11c7ceff3314a3222404feedda52",
+            "nm": "",
+            "ph": "",
+            "dp": 1
+        }
+    ]
+    expected_output = dict({"ext": 1, "pdf": 1})
+    file_ext_to_name = praser.process_json_log(missing_field_json_log)
+    actual_output = praser.get_file_ext_to_file_name_count(file_ext_to_name)
+    assert expected_output == actual_output
+
+
+def test_missing_fields():
+    missing_field_json_log = copy.deepcopy(sample_json_log)
+    missing_field_json_log = missing_field_json_log + [
+        {
+            "sha": "abb3ec1b8174043d5cd21d21fbe3c3fb3e9a11c7ceff3314a3222404feedda52",
+            "nm": "abc.jpg",
+            "ph": "/efvrfutgp/expgh/phkkrw.jpg",
+            "dp": 1
+        },
+        {
+            "sha": "abb3ec1b8174043d5cd21d21fbe3c3fb3e9a11c7ceff3314a3222404feedda52",
+            "nm": "asdf.png",
+            "ph": "/efvrfutgp/asdf.png",
+            "dp": 1
+        }
+    ]
+    expected_output = dict({"ext": 1, "pdf": 1})
+    file_ext_to_name = praser.process_json_log(missing_field_json_log)
+    actual_output = praser.get_file_ext_to_file_name_count(file_ext_to_name)
+    assert expected_output == actual_output
+
 

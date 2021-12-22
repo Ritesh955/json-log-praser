@@ -27,6 +27,23 @@ dp: disposition (valid values: MALICIOUS (1), CLEAN (2), UNKNOWN (3))
 
 ```
 
+Assumption: 
+
+Valid Json record is such a record that contains all the above fields. The field values
+should also follow the below field type mapping:
+
+```
+    "ts": {"type": "number"},
+    "pt": {"type": "number"},
+    "si": {"type": "string"},
+    "uu": {"type": "string"},
+    "bg": {"type": "string"},
+    "sha": {"type": "string"},
+    "nm": {"type": "string"},
+    "ph": {"type": "string"},
+    "dp": {"type": "number"},
+```
+
 About the project external dependencies/requirements:
 * jsonschema
 * nose
