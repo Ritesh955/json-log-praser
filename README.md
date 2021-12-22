@@ -27,9 +27,7 @@ dp: disposition (valid values: MALICIOUS (1), CLEAN (2), UNKNOWN (3))
 
 ```
 
-Assumption: 
-
-Valid Json record is such a record that contains all the above fields. The field values
+To keep the parser implementation simple we would consider that valid Json record is such a record that contains all the above fields. The field values
 should also follow the below field type mapping:
 
 ```
@@ -43,6 +41,8 @@ should also follow the below field type mapping:
     "ph": {"type": "string"},
     "dp": {"type": "number"},
 ```
+
+The most relevant fields are "dp" and "nm", from the example. 
 
 About the project external dependencies/requirements:
 * jsonschema
